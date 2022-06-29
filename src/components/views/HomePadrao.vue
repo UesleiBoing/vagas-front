@@ -31,11 +31,11 @@
 
     <div class="row mt-5">
       <div class="col-4">
-        <indicador-padrao titulo="Vagas abertas" indicador="100" bg="bg-dark" color="text-white"></indicador-padrao>
+        <indicador-padrao titulo="Vagas abertas" indicador="100" bg="bg-info" color="text-white"></indicador-padrao>
       </div>
 
       <div class="col-4">
-        <indicador-padrao titulo="Profissionais Cadastrados" indicador="254" bg="bg-dark" color="text-white"></indicador-padrao>
+        <indicador-padrao titulo="Profissionais Cadastrados" indicador="254" bg="bg-info" color="text-white"></indicador-padrao>
       </div>
 
       <div class="col-4">
