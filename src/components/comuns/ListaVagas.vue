@@ -23,7 +23,7 @@
 </template>
 <script>
 import VagaPadrao from '@/components/comuns/VagaPadrao.vue'
-export deault {
+expor deault {
     name : 'ListaVagas',
     data : () => ({
         vagas: []
