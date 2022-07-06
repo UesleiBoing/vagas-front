@@ -22,8 +22,8 @@
     </div>
 </template>
 <script>
-import VagaPadrao from '@/components/comuns/VagaPadrao.vue'
-export deault {
+import VagaPadrao from '@/components/comuns/VagaPadrao.vue';
+export default {
     name : 'ListaVagas',
     data : () => ({
         vagas: []
