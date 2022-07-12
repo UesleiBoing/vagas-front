@@ -1,26 +1,76 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
+stages: 
+    - build
+    - test
+    - pack
+    - deploy_dev
+    - deploy_demo
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+build_job:
+    stage: build
+    only:
+        - merge_requests
+        - develop
+        - demo
+    script:
+        - npm install
+        - npm run build
+    tags:
+        - Node_Build
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  say-hello-workflow:
-    jobs:
-      - say-hello
+test_job:
+    stage: test
+    only:
+        - merge_requests
+        - develop
+        - demo
+    script:
+        - npm install
+        - npm run test
+    tags:
+        - Node_Build
+    dependencies:
+        - build_job
+
+pack_job:
+    stage: pack
+    only:
+        - develop
+        - demo
+    script:
+        - npm install
+        - npm run build
+
+    artifacts:
+        expire_in: 1 day
+        paths:
+            - './dist/'
+    tags:
+        - Node_Build
+    dependencies:
+        - test_job
+
+deploy_dev_job:
+    stage: deploy_dev
+    variables:
+        GIT_STRATEGY: none
+    only:
+        - develop
+    script:
+        - xcopy "dist" "$env:CDN_HOMOLOG\$env:PASTA_DEPLOY\" /E /Y
+    tags:
+        - dev_build
+    dependencies:
+        - pack_job
+
+deploy_demo_job:
+    stage: deploy_demo
+    variables:
+        GIT_STRATEGY: none
+    only:
+        - demo
+    script:
+        - xcopy "dist" "$env:CDN_HOMOLOG\$env:PASTA_DEPLOY\" /E /Y
+    tags:
+        - dotnetframework
+    dependencies:
+        - pack_job
