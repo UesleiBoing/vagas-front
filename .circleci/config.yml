@@ -1,13 +1,5 @@
 version: 2
 jobs:
-  build:
-    executor: node/default
-    steps:
-      - checkout
-      - node/install-packages:
-          cache-path: ~/project/node_modules
-          override-ci-command: npm install
-      - run: npm run build
   test:
     executor: node/default
     steps:
@@ -19,5 +11,4 @@ jobs:
 workflows:
   test_my_app:
     jobs:
-      - build
       - test
