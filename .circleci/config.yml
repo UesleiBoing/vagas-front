@@ -7,7 +7,9 @@ jobs:
       - node/install-packages:
           cache-path: ~/project/node_modules
           override-ci-command: npm install
-      - run: npm run build
+      - run: 
+            name: Segue
+            command: npm run build
   serve:
     executor: node/default
     steps:
@@ -15,9 +17,13 @@ jobs:
       - node/install-packages:
           cache-path: ~/project/node_modules
           override-ci-command: npm install
-      - run: npm run serve
+      - run: 
+            name: Segue
+            command: npm run serve
 workflows:
   test_my_app:
     jobs:
       - build
-      - serve
+      - serve:
+        requires:
+          - build
