@@ -1,6 +1,6 @@
 <template>
     <div class="h-100 p-5 bg-light border rouded-3">
-        <h2>Pesquisar Vagas</h2>
+        <h2>Pesquisar Vagas Novo</h2>
         <div class="row">
             <div class="col">
               <div class="form-group">
