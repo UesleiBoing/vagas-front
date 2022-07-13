@@ -8,7 +8,7 @@
       </div>
 </template>
 <script>
-export default {
+export 2default {
     name: 'AlertaPadrao',
     props: { tipo: String },
     computed: {
