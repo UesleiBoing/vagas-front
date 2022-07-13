@@ -19,7 +19,7 @@ import ConteudoPadrao from '@/components/layouts/ConteudoPadrao.vue'
 import TopoPadrao from '@/components/layouts/TopoPadrao.vue'
 import VagasFavoritas from '@/components/comuns/VagasFavoritas.vue'
 
-export default {
+exporst default {
   name: 'App',
   data: () => ({
     visibilidade : true,
