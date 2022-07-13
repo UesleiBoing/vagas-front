@@ -28,7 +28,7 @@ jobs:
             - ~/.npm
       - run:
           name: Run Tests
-          command: npm run serve
+          command: npm run build
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
